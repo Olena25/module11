@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class StreamUtils {
@@ -13,10 +14,11 @@ public class StreamUtils {
 
     //task 1
     public static String getWordsWithOddIndex(List<String> names) {
-        List<String> filteredNames = names.stream()
-                .filter(name -> names.indexOf(name) % 2 != 0)
-                .map(name -> names.indexOf(name) + DOT + name)
+        List<String> filteredNames = IntStream.range(0, names.size())
+                .filter(index -> index % 2 != 0)
+                .mapToObj(index -> index + DOT + names.get(index))
                 .collect(Collectors.toList());
+
         return String.join(COMMA_DELIMITER, filteredNames);
     }
 
