@@ -33,13 +33,13 @@ public class StreamUtils {
 
   //task 3
   public static String getSortedNumbers(String[] numbers) {
-    List<String> sortedNumbers = Arrays.stream(numbers)
+    return Arrays.stream(numbers)
         .map(number -> number.split(COMMA_DELIMITER))
         .flatMap(Arrays::stream)
-        .map(String::trim)
+        .mapToInt(Integer::valueOf)
         .sorted()
-        .collect(Collectors.toList());
-    return String.join(COMMA_DELIMITER, sortedNumbers);
+        .mapToObj(String::valueOf)
+        .collect(Collectors.joining(COMMA_DELIMITER));
   }
 
   // task 4
